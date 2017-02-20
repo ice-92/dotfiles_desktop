@@ -1,0 +1,30 @@
+URxvt*termName: rxvt-256color
+URxvt*iso14755: false
+URxvt*urgentOnBell: true
+URxvt*scrollBar: false
+URxvt*font: xft:Inconsolata\ for\ Powerline:size=14
+URxvt*depth: 32
+URxvt*background: rgba:0000/0000/0200/c800
+
+*fadeColor: #002b36
+*cursorColor: #93a1a1
+*pointerColorBackground: #586e75
+*pointerColorForeground: #93a1a1
+
+*foreground: #d9e6f2
+*color0: #000000
+*color8: #262626
+*color1: #ae3d76
+*color9: #e9c1d5
+*color2: #76ae3d
+*color10: #d5e9c1
+*color3: #ae763d
+*color11: #e9d5c1
+*color4: #3d76ae
+*color12: #c1d5e9
+*color5: #763dae
+*color13: #d5c1e9
+*color6: #3dae76
+*color14: #c1e9d5
+*color7: #d9d9d9
+*color15: #ffffff
