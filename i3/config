@@ -66,11 +66,11 @@ bindsym $mod+space focus mode_toggle
 ## WORKSPACES ##
 ################
 
-set $ws1 "1- "
-set $ws2 "2- "
-set $ws3 "3- "
-set $ws4 "4- MEDIA"
-set $ws5 "5- CHAT"
+set $ws1 "1 - "
+set $ws2 "2 - "
+set $ws3 "3 - "
+set $ws4 "4 - MEDIA"
+set $ws5 "5 - CHAT"
 set $ws10 "SCRATCH"
 
 # left monitor
