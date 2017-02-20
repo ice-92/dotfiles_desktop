@@ -1,0 +1,257 @@
+font pango:Inconsolata\ for\ Powerline:14
+floating_modifier $mod
+
+###############
+# KEYBINDINGS #
+###############
+
+set $mod Mod4
+
+bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Shift+q kill
+
+bindsym $mod+a exec --no-startup-id i3-dmenu-desktop
+
+# border on, see where focus is
+bindsym $mod+semicolon exec i3-msg border pixel 3
+bindsym --release $mod+semicolon exec i3-msg border pixel 0
+
+# change focus
+bindsym $mod+h exec i3-msg border pixel 2; focus left
+bindsym $mod+j exec i3-msg border pixel 2; focus down
+bindsym $mod+k exec i3-msg border pixel 2; focus up
+bindsym $mod+l exec i3-msg border pixel 2; focus right
+bindsym --release $mod+h exec i3-msg border pixel 0
+bindsym --release $mod+j exec i3-msg border pixel 0
+bindsym --release $mod+k exec i3-msg border pixel 0
+bindsym --release $mod+l exec i3-msg border pixel 0
+
+# alt-tab focus
+#bindsym $mod+Tab exec i3-msg border pixel 2; focus right 
+bindsym $mod+Tab exec i3-cycle.sh
+
+# move focused window
+bindsym $mod+Shift+h exec i3-msg border pixel 2; move left
+bindsym $mod+Shift+j exec i3-msg border pixel 2; move down
+bindsym $mod+Shift+k exec i3-msg border pixel 2; move up
+bindsym $mod+Shift+l exec i3-msg border pixel 2; move right
+bindsym --release $mod+Shift+h exec i3-msg border pixel 0
+bindsym --release $mod+Shift+j exec i3-msg border pixel 0
+bindsym --release $mod+Shift+k exec i3-msg border pixel 0
+bindsym --release $mod+Shift+l exec i3-msg border pixel 0
+
+# split
+bindsym $mod+g split h 
+bindsym $mod+v split v
+
+# change container layout
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+bindsym $mod+f fullscreen toggle
+bindsym $mod+Shift+space floating toggle
+
+# change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+
+# focus the parent container
+#bindsym $mod+a focus parent
+
+# focus the child container
+#bindsym $mod+d focus child
+
+
+################
+## WORKSPACES ##
+################
+
+set $ws1 "1- "
+set $ws2 "2- "
+set $ws3 "3- "
+set $ws4 "4- MEDIA"
+set $ws5 "5- CHAT"
+set $ws10 "SCRATCH"
+
+# left monitor
+workspace $ws1 output DVI-I-1
+workspace $ws2 output DVI-I-1
+
+# right monitor
+workspace $ws3 output DVI-D-0
+workspace $ws4 output DVI-D-0
+workspace $ws5 output DVI-D-0
+workspace $ws10  output DVI-D-0
+
+# switch to workspace
+bindsym $mod+1 workspace $ws1
+bindsym $mod+2 workspace $ws2
+bindsym $mod+3 workspace $ws3
+bindsym $mod+4 workspace $ws4
+bindsym $mod+5 workspace $ws5 
+bindsym $mod+6 workspace 6
+bindsym $mod+7 workspace 7
+bindsym $mod+8 workspace 8
+bindsym $mod+9 workspace 9
+bindsym $mod+0 workspace $ws10 
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace $ws1 
+bindsym $mod+Shift+2 move container to workspace $ws2
+bindsym $mod+Shift+3 move container to workspace $ws3
+bindsym $mod+Shift+4 move container to workspace $ws4
+bindsym $mod+Shift+5 move container to workspace $ws5
+bindsym $mod+Shift+6 move container to workspace 6
+bindsym $mod+Shift+7 move container to workspace 7
+bindsym $mod+Shift+8 move container to workspace 8
+bindsym $mod+Shift+9 move container to workspace 9
+bindsym $mod+Shift+0 move container to workspace $ws10
+
+# reload the configuration file
+bindsym $mod+Shift+c reload
+
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+r restart
+
+# exit i3 (logs you out of your X session)
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+
+bindsym $mod+Shift+x exec i3lock-fancy 
+
+
+#############
+# AUTOSTART #
+############
+
+exec_always feh --bg-scale ~/Wallpapers/wallpaper-2444102.jpg
+
+exec compton -b
+exec steam
+exec nm-applet --sm-disable
+exec mpd
+exec urxvtd -q -f -o
+exec discord
+exec sxhkd 
+
+###########
+# COLOURS #
+###########
+
+set $bg-color 	         #2f343f
+set $inactive-bg-color   #2f343f
+set $text-color          #f3f4f5
+set $inactive-text-color #676E7D
+set $urgent-bg-color 	 #E53935
+
+                        #border             	background         	text                 indicator
+client.focused          $bg-color		$bg-color          	$text-color          
+client.unfocused        $inactive-bg-color 	$inactive-bg-color 	$inactive-text-color 
+client.focused_inactive $inactive-bg-color 	$inactive-bg-color 	$inactive-text-color 
+client.urgent 		$urgent-bg-color 	$urgent-bg-color 	$text-color 		 
+
+#######
+# BAR #
+#######
+
+# Start i3bar to display a workspace bar (plus the system information i3status
+# finds out, if available)
+bar {
+        position top
+	status_command i3status
+	separator_symbol "//"
+	#mode visible
+}
+
+
+#########
+# MODES #
+#########
+
+# resize window (you can also use the mouse for that)
+mode "resize" {
+        # These bindings trigger as soon as you enter the resize mode
+
+        # Pressing left will shrink the window’s width.
+        # Pressing right will grow the window’s width.
+        # Pressing up will shrink the window’s height.
+        # Pressing down will grow the window’s height.
+        bindsym j resize shrink width 5 px or 5 ppt
+        bindsym k resize grow height 5 px or 5 ppt
+        bindsym l resize shrink height 5 px or 5 ppt
+        bindsym semicolon resize grow width 5 px or 5 ppt
+
+        # same bindings, but for the arrow keys
+        bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Down resize grow height 10 px or 10 ppt
+        bindsym Up resize shrink height 10 px or 10 ppt
+        bindsym Right resize grow width 10 px or 10 ppt
+
+        # back to normal: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+bindsym $mod+r mode "resize"
+
+
+# Press $mod+Shift+g to enter the gap mode. Choose o or i for modifying outer/inner gaps. 
+# Press one of + / - (in-/decrement for current workspace) or 0 (remove gaps for current workspace). 
+# If you also press Shift with these keys, the change will be global for all workspaces.
+
+for_window [class="^.*"] border pixel 0
+gaps inner 5 
+gaps outer 9 
+smart_gaps on
+
+set $mode_gaps Gaps: (o) outer, (i) inner
+
+set $mode_gaps_outer Outer Gaps: +|-|0 (local), Shift + +|-|0 (global)
+set $mode_gaps_inner Inner Gaps: +|-|0 (local), Shift + +|-|0 (global)
+
+bindsym $mod+Shift+g mode "$mode_gaps"
+
+mode "$mode_gaps" {
+        bindsym o      mode "$mode_gaps_outer"
+        bindsym i      mode "$mode_gaps_inner"
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+mode "$mode_gaps_inner" {
+        bindsym plus  gaps inner current plus 5
+        bindsym minus gaps inner current minus 5
+        bindsym 0     gaps inner current set 0
+
+        bindsym Shift+plus  gaps inner all plus 5
+        bindsym Shift+minus gaps inner all minus 5
+        bindsym Shift+0     gaps inner all set 0
+
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+mode "$mode_gaps_outer" {
+        bindsym plus  gaps outer current plus 5
+        bindsym minus gaps outer current minus 5
+        bindsym 0     gaps outer current set 0
+
+        bindsym Shift+plus  gaps outer all plus 5
+        bindsym Shift+minus gaps outer all minus 5
+        bindsym Shift+0     gaps outer all set 0
+
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+# System Menu #
+set $sysmenu "[p]oweroff  re[b]oot  [r]eload [s]uspend  [l]ogout  "
+bindsym $mod+Delete      mode $sysmenu
+
+mode $sysmenu {
+    bindsym r         restart
+    bindsym l         exit
+    bindsym p         exec shutdown -P now
+    bindsym b         exec shutdown -r now
+    bindsym s         exec systemct suspend
+    bindsym Return    mode "default"
+    bindsym Escape    mode "default"
+}
