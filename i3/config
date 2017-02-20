@@ -1,9 +1,10 @@
-font pango:Inconsolata\ for\ Powerline:14
+font pango:Inconsolata\ for\ Powerline 14 
 floating_modifier $mod
+new_window 1pixel
 
-###############
-# KEYBINDINGS #
-###############
+################################################################
+#:::::::::::::::::::::::: Keybinds ::::::::::::::::::::::::::::#
+################################################################
 
 set $mod Mod4
 
@@ -17,28 +18,38 @@ bindsym $mod+semicolon exec i3-msg border pixel 3
 bindsym --release $mod+semicolon exec i3-msg border pixel 0
 
 # change focus
-bindsym $mod+h exec i3-msg border pixel 2; focus left
-bindsym $mod+j exec i3-msg border pixel 2; focus down
-bindsym $mod+k exec i3-msg border pixel 2; focus up
-bindsym $mod+l exec i3-msg border pixel 2; focus right
-bindsym --release $mod+h exec i3-msg border pixel 0
-bindsym --release $mod+j exec i3-msg border pixel 0
-bindsym --release $mod+k exec i3-msg border pixel 0
-bindsym --release $mod+l exec i3-msg border pixel 0
+#bindsym $mod+h exec i3-msg border pixel 2; focus left
+#bindsym $mod+j exec i3-msg border pixel 2; focus down
+#bindsym $mod+k exec i3-msg border pixel 2; focus up
+#bindsym $mod+l exec i3-msg border pixel 2; focus right
+#bindsym --release $mod+h exec i3-msg border pixel 0
+#bindsym --release $mod+j exec i3-msg border pixel 0
+#bindsym --release $mod+k exec i3-msg border pixel 0
+#bindsym --release $mod+l exec i3-msg border pixel 0
+
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
 
 # alt-tab focus
 #bindsym $mod+Tab exec i3-msg border pixel 2; focus right 
 bindsym $mod+Tab exec i3-cycle.sh
 
 # move focused window
-bindsym $mod+Shift+h exec i3-msg border pixel 2; move left
-bindsym $mod+Shift+j exec i3-msg border pixel 2; move down
-bindsym $mod+Shift+k exec i3-msg border pixel 2; move up
-bindsym $mod+Shift+l exec i3-msg border pixel 2; move right
-bindsym --release $mod+Shift+h exec i3-msg border pixel 0
-bindsym --release $mod+Shift+j exec i3-msg border pixel 0
-bindsym --release $mod+Shift+k exec i3-msg border pixel 0
-bindsym --release $mod+Shift+l exec i3-msg border pixel 0
+#bindsym $mod+Shift+h exec i3-msg border pixel 2; move left
+#bindsym $mod+Shift+j exec i3-msg border pixel 2; move down
+#bindsym $mod+Shift+k exec i3-msg border pixel 2; move up
+#bindsym $mod+Shift+l exec i3-msg border pixel 2; move right
+#bindsym --release $mod+Shift+h exec i3-msg border pixel 0
+#bindsym --release $mod+Shift+j exec i3-msg border pixel 0
+#bindsym --release $mod+Shift+k exec i3-msg border pixel 0
+#bindsym --release $mod+Shift+l exec i3-msg border pixel 0
+
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
 
 # split
 bindsym $mod+g split h 
@@ -62,15 +73,15 @@ bindsym $mod+space focus mode_toggle
 #bindsym $mod+d focus child
 
 
-################
-## WORKSPACES ##
-################
+################################################################
+#:::::::::::::::::::::::: Workspaces:::::::::::::::::::::::::::#
+################################################################
 
-set $ws1 "1 - "
-set $ws2 "2 - "
-set $ws3 "3 - "
-set $ws4 "4 - MEDIA"
-set $ws5 "5 - CHAT"
+set $ws1 "1:  "
+set $ws2 "2:  "
+set $ws3 "3:  "
+set $ws4 "4: MEDIA"
+set $ws5 "5: CHAT"
 set $ws10 "SCRATCH"
 
 # left monitor
@@ -133,25 +144,32 @@ exec urxvtd -q -f -o
 exec discord
 exec sxhkd 
 
-###########
-# COLOURS #
-###########
+for_window [class="Firefox"] enable border pixel 1
 
-set $bg-color 	         #2f343f
+
+################################################################
+#:::::::::::::::::::::::::: Colours :::::::::::::::::::::::::::#
+################################################################
+
+
+#set $bg-color 	         #2f343f
+set $bg-color		 #416dcc
 set $inactive-bg-color   #2f343f
 set $text-color          #f3f4f5
 set $inactive-text-color #676E7D
 set $urgent-bg-color 	 #E53935
 
                         #border             	background         	text                 indicator
-client.focused          $bg-color		$bg-color          	$text-color          
-client.unfocused        $inactive-bg-color 	$inactive-bg-color 	$inactive-text-color 
-client.focused_inactive $inactive-bg-color 	$inactive-bg-color 	$inactive-text-color 
-client.urgent 		$urgent-bg-color 	$urgent-bg-color 	$text-color 		 
+client.focused          $bg-color		$bg-color          	$text-color 	     $bg-color         
+client.unfocused        $inactive-bg-color 	$inactive-bg-color 	$inactive-text-color $bg-color 
+client.focused_inactive $inactive-bg-color 	$inactive-bg-color 	$inactive-text-color $bg-color
+client.urgent 		$urgent-bg-color 	$urgent-bg-color 	$text-color 	     $bg-color
 
-#######
-# BAR #
-#######
+
+################################################################
+#:::::::::::::::::::::::::::: Bar :::::::::::::::::::::::::::::#
+################################################################
+
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
@@ -163,9 +181,17 @@ bar {
 }
 
 
-#########
-# MODES #
-#########
+
+
+
+#for_window [class="URxvt"] floating enable border pixel 4
+
+
+
+
+################################################################
+#:::::::::::::::::::::::::: Modes :::::::::::::::::::::::::::::#
+################################################################
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -198,9 +224,11 @@ bindsym $mod+r mode "resize"
 # Press one of + / - (in-/decrement for current workspace) or 0 (remove gaps for current workspace). 
 # If you also press Shift with these keys, the change will be global for all workspaces.
 
-for_window [class="^.*"] border pixel 0
-gaps inner 5 
-gaps outer 9 
+#for_window [class="^.*"] border pixel 0
+
+
+gaps inner 10 
+gaps outer 4 
 smart_gaps on
 
 set $mode_gaps Gaps: (o) outer, (i) inner
