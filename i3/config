@@ -1,4 +1,5 @@
-font pango:Inconsolata\ for\ Powerline 14 
+#font pango:Inconsolata\ for\ Powerline 14 
+font pango:zekton 12
 floating_modifier $mod
 new_window 1pixel
 
@@ -77,11 +78,11 @@ bindsym $mod+space focus mode_toggle
 #:::::::::::::::::::::::: Workspaces:::::::::::::::::::::::::::#
 ################################################################
 
-set $ws1 "1:  "
-set $ws2 "2:  "
-set $ws3 "3:  "
-set $ws4 "4: MEDIA"
-set $ws5 "5: CHAT"
+set $ws1 "1:  "
+set $ws2 "2:  "
+set $ws3 "3:  "
+set $ws4 "4:  "
+set $ws5 "5:  "
 set $ws10 "SCRATCH"
 
 # left monitor
@@ -127,7 +128,11 @@ bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
+# i3lock
 bindsym $mod+Shift+x exec i3lock-fancy 
+
+# switch to last used workspace
+bindsym $mod+Escape workspace back_and_forth
 
 
 #############
@@ -143,6 +148,9 @@ exec mpd
 exec urxvtd -q -f -o
 exec discord
 exec sxhkd 
+exec synergy
+exec xscreensaver -nosplash
+exec setxkbmap -option ctrl:nocaps
 
 for_window [class="Firefox"] enable border pixel 1
 
@@ -175,9 +183,10 @@ client.urgent 		$urgent-bg-color 	$urgent-bg-color 	$text-color 	     $bg-color
 # finds out, if available)
 bar {
         position top
-	status_command i3status
+	status_command i3blocks
 	separator_symbol "//"
 	#mode visible
+	font pango: zekton 14
 }
 
 
@@ -224,12 +233,13 @@ bindsym $mod+r mode "resize"
 # Press one of + / - (in-/decrement for current workspace) or 0 (remove gaps for current workspace). 
 # If you also press Shift with these keys, the change will be global for all workspaces.
 
-#for_window [class="^.*"] border pixel 0
+for_window [class="^.*"] border pixel 1 
 
 
 gaps inner 10 
 gaps outer 4 
 smart_gaps on
+smart_borders on
 
 set $mode_gaps Gaps: (o) outer, (i) inner
 
@@ -283,3 +293,11 @@ mode $sysmenu {
     bindsym Return    mode "default"
     bindsym Escape    mode "default"
 }
+
+
+################################################################
+#:::::::::::::::::::::::::Run or Raise:::::::::::::::::::::::::#
+################################################################
+
+bindsym $mod+Shift+f exec run-or-raise -c "Firefox" firefox
+bindsym $mod+Shift+s exec run-or-raise -c "Steam" steam
